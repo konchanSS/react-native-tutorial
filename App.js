@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistru, View } from 'react-native';
+import { AppRegistry, Text, View } from 'react-native';
 
 export default class App extends Component {
   render() {
