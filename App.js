@@ -1,16 +1,56 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { Alert, AppRegistry, Button, StyleSheet,View } from 'react-native';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+export default class ButtonBasics extends Component {
+    _onPressButton() {
+        Alert.alert('You tapped the button!')
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={this._onPressButton}
+                        title="Press Me"
+                    />
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={this._onPressButton}
+                        title="Press Me"
+                        color="#841584"
+                    />
+                </View>
+                <View style={styles.alternativeLayoutButtonContainer}>
+                    <Button
+                        onPress={this._onPressButton}
+                        title="This looks grea!"
+                    />
+                    <Button
+                        onPress={this._onPressButton}
+                        title="OK!"
+                        color="#841584"
+                    />
+                </View>
+            </View>
+        );
+    }
 }
 
-AppRegistry.registerComponent('react-native-tutorial', () => App);
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    buttonContainer : {
+        margin: 20
+    },
+    alternativeLayoutButtonContainer: {
+        margin: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+})
+
+AppRegistry.registerComponent('react-native-tutorial', () => ButtonBasics);
