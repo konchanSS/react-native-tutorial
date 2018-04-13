@@ -1,16 +1,47 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { FlatList, AppRegistry, ActivityIndicator, Text, View } from 'react-native';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+export default class FetchExample extends Component {
+    constructor(props){
+        super(props);
+        this.state ={ isLoading: true}
+    }
+
+    componentDidMount(){
+        return fetch('https://facebook.github.io/react-native/movies.json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson.movies,
+                }, function () {
+
+                });
+        })
+            .catch((error) =>{
+                console.error(error);
+            });
+    }
+
+    render() {
+        if(this.state.isLoading){
+            return(
+                <View style={{flex:1, padding: 20}}>
+                    <ActivityIndicator/>
+                </View>
+            )
+        }
+
+        return(
+            <View style={{flex:1, paddingTop:20}}>
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+                    keyExtractor={(item, index) => index}
+                />
+            </View>
+        );
   }
 }
 
-AppRegistry.registerComponent('react-native-tutorial', () => App);
+AppRegistry.registerComponent('react-native-tutorial', () => FetchExample);
