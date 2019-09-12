@@ -1,16 +1,73 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { Alert, AppRegistry, Platform, Button, Text, StyleSheet,View, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback} from 'react-native';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+export default class Touchables extends Component {
+    _onPressButton() {
+        Alert.alert('You tapped the button!')
+    }
+
+    _onLongPressButton() {
+        Alert.alert('Long Touch')
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>TouchbleHeighlight</Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableOpacity onPress={this._onPressButton}>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>TouchableOpacity</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableNativeFeedback
+                    onPress={this._onPressButton}
+                    background={Platform.OS === 'android' ?
+                        TouchableNativeFeedback.SelectableBackground() : ''
+                    }
+                >
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>TouchableNativeFeedback</Text>
+                    </View>
+                </TouchableNativeFeedback>
+                <TouchableWithoutFeedback onPress={this._onPressButton}>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableHighlight
+                    onPress={this._onPressButton}
+                    onLongPress={this._onLongPressButton}
+                    underlayColor="white"
+                >
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Touchable with Long Press</Text>
+                    </View>
+                </TouchableHighlight>
+            </View>
+
+        );
+    }
 }
 
-AppRegistry.registerComponent('react-native-tutorial', () => App);
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: 60,
+        alignItems: 'center'
+    },
+    button: {
+        marginBottom: 30,
+        width: 260,
+        alignItems: 'center',
+        backgroundColor: '#2196F3'
+    },
+    buttonText: {
+        padding: 20,
+        color: 'white'
+    }
+})
+
+AppRegistry.registerComponent('react-native-tutorial', () => Touchables);
