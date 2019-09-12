@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry, ScrollView,Image, Text } from 'react-native';
 
-export default class App extends Component {
+export default class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
   render() {
     return (
-      <View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <ScrollView>
+          <Text style={{fontSize:96}}>Scroll me plz</Text>
+          <Text style={{fontSize:96}}>If you like</Text>
+          <Text style={{fontSize:96}}>Scrolling down</Text>
+          <Text style={{fontSize:96}}>What's the best</Text>
+          <Text style={{fontSize:96}}>Framework around?</Text>
+          <Text style={{fontSize:80}}>React Native</Text>
+      </ScrollView>
     );
   }
 }
 
-AppRegistry.registerComponent('react-native-tutorial', () => App);
+AppRegistry.registerComponent('react-native-tutorial', () => IScrolledDownAndWhatHappenedNextShockedMe);
